@@ -1,0 +1,32 @@
+<div class="barra">
+  <button type="button" class="cerrar" (click)="abrirPerfiles()">+</button>
+  <h3 class="titulo-calculadora">{{ store.tituloCalculadora() }}</h3>
+  <button type="button" (click)="abrirVDR()">VDR%</button>
+</div>
+
+<app-vdr-panel />
+
+<app-profiles-panel />
+
+<app-distribution-panel />
+
+<div id="panel3" [class.abierto]="ui.activePanel() === 'panel3'">
+  <div class="barra">
+    <button type="button" class="cerrar" (click)="cerrarPanel3()">×</button>
+    <h3>Calculadora Nutricional</h3>
+    <button type="button" class="transparente">VDR%</button>
+  </div>
+</div>
+
+<div id="contenedor-comidas">
+  @for (uKey of [store.usuarioActivo()]; track uKey) {
+    @for (comida of comidas; track comida) {
+      <app-meal-section [usuario]="uKey" [comida]="comida" />
+    }
+    <app-total-section [usuario]="uKey" />
+  }
+</div>
+
+<app-alert-modal />
+
+<app-toast />
